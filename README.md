@@ -1,12 +1,23 @@
-## Getting Started
+Vibe coded my personal portfolio site.
 
-First, run the development server:
+Inspired by Dracula theme and the VS code UI.
+
+## Getting Started
+Recommended npm version: `10.9.2`
+
+First, install the dependencies:
+```bash
+npm install
+```
+
+Then run the development server:
 
 ```bash
 npm run dev
 ```
+Hot reload is supported.
 
-Alter the site data in `/src/data`
+Alter the site data in `/src/data` if you want to serve it yourself.
 
 ## Useful commands
 Build with
