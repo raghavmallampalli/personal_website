@@ -4,16 +4,10 @@ import { favorites } from "./config";
 
 export default function Home() {
   return (
-    <div 
-      className="min-h-full p-6 flex flex-col"
-      style={{ color: 'var(--dracula-foreground)' }}
-    >
+    <div className="page-container">
       {/* Header Section */}
       <div className="mb-6">
-        <h1 
-          className="text-2xl md:text-3xl font-light mb-1"
-          style={{ color: 'var(--dracula-purple)' }}
-        >
+        <h1 className="text-2xl md:text-3xl font-light page-title">
           Raghav Mallampalli
         </h1>
         <p 

@@ -17,7 +17,7 @@ export default function Sidebar() {
     { href: "/", title: "Home", icon: VscFiles },
     { href: "/skills", title: "Skills", icon: VscTools },
     { href: "/experience", title: "Experience", icon: VscSourceControl },
-    { href: "/blog", title: "Blog", icon: VscEdit }, // Changed to VscEdit for variety
+    { href: "#", title: "Blog", icon: VscEdit }, // TODO: dead link - will be updated later
   ];
 
   return (

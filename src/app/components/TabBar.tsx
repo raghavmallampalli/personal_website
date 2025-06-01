@@ -36,7 +36,7 @@ export default function TabBar() {
     { icon: VscHome, label: "Home", path: "/" },
     { icon: VscTools, label: "Skills", path: "/skills" },
     { icon: VscSourceControl, label: "Experience", path: "/experience" },
-    { icon: VscFiles, label: "Blog", path: "/blog" },
+    { icon: VscFiles, label: "Blog", path: "#" },
   ];
 
   const activeTab = tabsConfig.find(tab => tab.path === currentPath) || tabsConfig[0];

@@ -18,6 +18,20 @@
   /* Additional shades for UI */
   --dracula-darker: #21222C; /* Darker shade for tab bar and status bar */
   --dracula-bright-white: #FFFFFF; /* Brighter white for active sidebar icon */
+  
+  /* GitGraph specific variables */
+  --gitgraph-branch-line-width: 2;
+  --gitgraph-branch-spacing: 30;
+  --gitgraph-commit-spacing: 30;
+  --gitgraph-dot-size: 6;
+  --gitgraph-dot-stroke-width: 1;
+  --gitgraph-container-padding: 2rem;
+  --gitgraph-title-margin-bottom: 1.5rem;
+  --gitgraph-title-top-offset: 6rem; /* 2rem padding + 2.5rem title + 1.5rem margin = 6rem */
+  
+  /* Global page layout variables */
+  --page-padding: 1.5rem; /* Consistent with Tailwind's p-6 */
+  --page-title-margin-bottom: 0.25rem; /* Consistent with Tailwind's mb-1 */
    
   /* Overriding existing theme variables */
   --background: var(--dracula-background); 
@@ -55,4 +69,77 @@ a {
 a:hover {
   color: var(--dracula-purple);
   text-decoration: underline;
+}
+
+/* Custom VS Code-style scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox scrollbar support */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* GitGraph Experience Page Styles */
+.experience-container {
+  background-color: var(--dracula-background);
+  color: var(--dracula-foreground);
+  overflow: hidden;
+  position: relative;
+  padding: var(--page-padding); /* Use consistent page padding */
+}
+
+.experience-title {
+  color: var(--dracula-purple);
+  margin-bottom: var(--gitgraph-title-margin-bottom);
+}
+
+.experience-scrollable {
+  background-color: var(--dracula-background);
+  position: absolute;
+  top: calc(var(--page-padding) + 2.5rem + var(--gitgraph-title-margin-bottom)); /* Dynamic calculation */
+  left: var(--page-padding);
+  right: var(--page-padding);
+  bottom: var(--page-padding);
+  overflow: auto;
+}
+
+/* Global Page Layout Classes */
+.page-container {
+  min-height: 100%;
+  padding: var(--page-padding);
+  display: flex;
+  flex-direction: column;
+  color: var(--dracula-foreground);
+}
+
+.page-title {
+  color: var(--dracula-purple);
+  margin-bottom: var(--page-title-margin-bottom);
 }
