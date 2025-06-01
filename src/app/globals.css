@@ -143,3 +143,150 @@ a:hover {
   color: var(--dracula-purple);
   margin-bottom: var(--page-title-margin-bottom);
 }
+
+/* Jupyter Notebook Styles for Skills Page */
+.notebook-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 100%;
+}
+
+.notebook-cell {
+  background-color: var(--dracula-background);
+  border: 1px solid var(--dracula-current-line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.notebook-cell:hover {
+  border-color: var(--dracula-purple);
+  box-shadow: 0 4px 8px rgba(189, 147, 249, 0.1);
+}
+
+.cell-header {
+  background-color: var(--dracula-current-line);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--dracula-selection);
+}
+
+.cell-number {
+  color: var(--dracula-cyan);
+  font-weight: 600;
+  min-width: 4rem;
+}
+
+.cell-type {
+  color: var(--dracula-comment);
+  background-color: var(--dracula-selection);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cell-content {
+  padding: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dracula-purple);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.skill-item {
+  background-color: var(--dracula-darker);
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--dracula-current-line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.skill-item:hover {
+  border-color: var(--dracula-purple);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(189, 147, 249, 0.15);
+}
+
+.skill-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.skill-desc {
+  color: var(--dracula-comment);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.code-cell {
+  background-color: var(--dracula-darker);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.code-cell pre {
+  margin: 0;
+  padding: 1rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.code-cell code {
+  color: var(--dracula-foreground);
+}
+
+.cell-output {
+  padding: 1rem;
+  background-color: var(--dracula-darker);
+  border-top: 1px solid var(--dracula-current-line);
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  display: flex;
+  gap: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cell-header {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .cell-content {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
