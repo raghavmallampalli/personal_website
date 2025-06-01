@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { createGitgraph, templateExtend, TemplateName, Mode, Orientation } from '@gitgraph/js';
+import { createGitgraph, templateExtend, TemplateName, Orientation } from '@gitgraph/js';
 import CustomScrollbar from '@/components/CustomScrollbar';
-import yaml from 'js-yaml';
 
 interface ExperienceEvent {
   name: string;
@@ -14,10 +13,6 @@ interface ExperienceItem {
   'start-date': string;
   place: string;
   events: ExperienceEvent[];
-}
-
-interface ExperienceData {
-  experience: ExperienceItem[];
 }
 
 export default function ExperiencePage() {
@@ -130,7 +125,7 @@ export default function ExperiencePage() {
     });
 
     // Process jobs in reverse order (most recent first)
-    [...experienceData].reverse().forEach((job, index) => {
+    [...experienceData].reverse().forEach((job) => {
       // Create a branch for this job's events
       const eventBranch = master.branch({
         name: `events`,
@@ -143,7 +138,7 @@ export default function ExperiencePage() {
       });
       
       // Add sequential commits for each event (in reverse order)
-      [...job.events].reverse().forEach((event, eventIndex) => {
+      [...job.events].reverse().forEach((event) => {
         eventBranch.commit({
           subject: `${event.name}`,
           style: {
@@ -209,7 +204,7 @@ export default function ExperiencePage() {
           const textContent = textElement.textContent || '';
           
           // Check if this is an occupation commit (contains company/role names)
-          const isOccupation = experienceData.some(job => 
+          const isOccupation = experienceData.some(() => 
             textContent.includes("|")
           );
           

@@ -163,7 +163,7 @@ export default function Home() {
               className="text-lg font-medium mb-4"
               style={{ color: 'var(--dracula-foreground)' }}
             >
-              Current Obsessions
+              My Current Obsessions
             </h2>
             <div className="space-y-3">
               {obsessionsData.obsessions.map((item, index) => (
