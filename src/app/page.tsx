@@ -98,7 +98,7 @@ export default function Home() {
           <section>
             <h2 
               className="text-lg font-medium mb-3"
-              style={{ color: 'var(--dracula-foreground)' }}
+              style={{ color: 'var(--dracula-green)' }}
             >
               About Me
             </h2>
@@ -136,13 +136,13 @@ export default function Home() {
           <section>
             <h2 
               className="text-lg font-medium mb-3"
-              style={{ color: 'var(--dracula-foreground)' }}
+              style={{ color: 'var(--dracula-green)' }}
             >
               {aboutData.about.current_hustle.title}
             </h2>
             <p 
               className="text-xs"
-              style={{ color: 'var(--dracula-comment)' }}
+              style={{ color: 'var(--dracula-foreground)' }}
             >
               {aboutData.about.current_hustle.message}{' '}
               <a 
@@ -161,7 +161,7 @@ export default function Home() {
           <section className="flex-1">
             <h2 
               className="text-lg font-medium mb-4"
-              style={{ color: 'var(--dracula-foreground)' }}
+              style={{ color: 'var(--dracula-green)' }}
             >
               My Current Obsessions
             </h2>

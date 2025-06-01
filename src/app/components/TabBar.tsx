@@ -32,14 +32,34 @@ const TabItem: React.FC<TabItemProps> = ({ icon: Icon, label, isActive }) => {
 export default function TabBar() {
   const currentPath = usePathname();
 
-  const tabsConfig = [
-    { icon: VscHome, label: "Home", path: "/" },
-    { icon: VscTools, label: "Skills", path: "/skills" },
-    { icon: VscSourceControl, label: "Experience", path: "/experience" },
-    { icon: VscFiles, label: "Blog", path: "#" },
-  ];
+  const getPageName = (path: string): string => {
+    switch (path) {
+      case "/":
+        return "Welcome";
+      case "/skills/":
+        return "Skills";
+      case "/experience/":
+        return "Experience";
+      default:
+        return "New Page";
+    }
+  };
 
-  const activeTab = tabsConfig.find(tab => tab.path === currentPath) || tabsConfig[0];
+  const getPageIcon = (path: string): React.ElementType => {
+    switch (path) {
+      case "/":
+        return VscHome;
+      case "/skills/":
+        return VscTools;
+      case "/experience/":
+        return VscSourceControl;
+      default:
+        return VscFiles;
+    }
+  };
+
+  const currentPageName = getPageName(currentPath);
+  const currentPageIcon = getPageIcon(currentPath);
 
   return (
     <div 
@@ -50,15 +70,12 @@ export default function TabBar() {
       }}
     >
       <div className="flex h-full">
-        {activeTab && (
-          <TabItem 
-            key={activeTab.label} 
-            icon={activeTab.icon} 
-            label={activeTab.label} 
-            isActive={true} 
-            path={activeTab.path} 
-          />
-        )}
+        <TabItem 
+          icon={currentPageIcon} 
+          label={currentPageName} 
+          isActive={true} 
+          path={currentPath} 
+        />
       </div>
       <div className="px-2 flex items-center h-full">
         <span className="text-[var(--dracula-comment)]">···</span> 
