@@ -27,13 +27,13 @@ skills:
       cell_type: "markdown"
       title: "🌐 Application Development"
       skills:
-        - name: "React + Next.js + Tailwind"
+        - name: "react + next.js + tailwind"
           color: "var(--dracula-cyan)"
-          description: "Frontend framework"
-        - name: "React Native"
+          description: "frontend framework"
+        - name: "react native"
           color: "var(--dracula-pink)"
-          description: "Backend JavaScript runtime"
-        - name: "C# MVVM"
+          description: "native-like cross platform apps"
+        - name: "c# mvvm"
           color: "var(--dracula-pink)"
           description: "sub 100ms web applications"
 
