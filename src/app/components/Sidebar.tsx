@@ -2,13 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { VscFiles, VscTools, VscSourceControl, VscEdit, VscAccount } from "react-icons/vsc";
+import Image from "next/image";
+import { VscFiles, VscTools, VscSourceControl, VscEdit } from "react-icons/vsc";
 
 const iconStyle = "text-[var(--dracula-comment)] hover:text-[var(--dracula-purple)] cursor-pointer";
-const activeIconStyle = "text-[var(--dracula-bright-white)]"; // Brighter white for active
-
-// This is a simplified example; actual active state would come from router/state
-// For now, we assume Home (VscFiles) is active for styling purposes.
+const activeIconStyle = "text-[var(--dracula-bright-white)]";
 
 export default function Sidebar() {
   const currentPath = usePathname();
@@ -17,7 +15,7 @@ export default function Sidebar() {
     { href: "/", title: "Home", icon: VscFiles },
     { href: "/skills", title: "Skills", icon: VscTools },
     { href: "/experience", title: "Experience", icon: VscSourceControl },
-    { href: "#", title: "Blog", icon: VscEdit }, // TODO: dead link - will be updated later
+    { href: "https://www.instagram.com/suneclipsedmoon/", title: "Blog", icon: VscEdit },
   ];
 
   return (
@@ -28,6 +26,22 @@ export default function Sidebar() {
       <div className="flex flex-col items-center space-y-6">
         {navItems.map((item) => {
           const isActive = item.href === currentPath;
+          const isExternal = item.href.startsWith('http');
+          
+          if (isExternal) {
+            return (
+              <a 
+                key={item.title} 
+                href={item.href} 
+                title={item.title}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <item.icon size={28} className={iconStyle} />
+              </a>
+            );
+          }
+          
           return (
             <Link key={item.title} href={item.href} title={item.title}>
               <item.icon size={28} className={isActive ? activeIconStyle : iconStyle} />
@@ -36,17 +50,22 @@ export default function Sidebar() {
         })}
       </div>
       
-      {/* Photo placeholder at bottom */}
+      {/* Profile photo at bottom */}
       <div 
-        className="w-8 h-8 rounded-full flex items-center justify-center border"
+        className="w-8 h-8 rounded-full flex items-center justify-center border overflow-hidden"
         style={{ 
           backgroundColor: 'var(--dracula-background)', 
-          borderColor: 'var(--dracula-comment)',
-          color: 'var(--dracula-comment)'
+          borderColor: 'var(--dracula-comment)'
         }}
         title="Profile Photo"
       >
-        <VscAccount size={16} />
+        <Image
+          src="/profile_photo.jpg"
+          alt="Profile Photo"
+          width={32}
+          height={32}
+          className="w-full h-full object-cover object-center rounded-full"
+        />
       </div>
     </aside>
   );
