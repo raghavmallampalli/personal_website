@@ -157,8 +157,8 @@ export default function Home() {
         </div>
 
         {/* Right Column */}
-        <div>
-          <section>
+        <div className="flex flex-col">
+          <section className="flex-1">
             <h2 
               className="text-lg font-medium mb-4"
               style={{ color: 'var(--dracula-foreground)' }}
@@ -193,6 +193,22 @@ export default function Home() {
               ))}
             </div>
           </section>
+          
+          {/* Open Source Footer */}
+          <div className="mt-6 text-right">
+            <p className="text-xs" style={{ color: 'var(--dracula-comment)' }}>
+              code for this site is opensourced on{' '}
+              <a 
+                href="https://github.com/raghavmallampalli/personal_website"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline transition-colors duration-200"
+                style={{ color: 'var(--dracula-cyan)' }}
+              >
+                https://github.com/raghavmallampalli/personal_website
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>

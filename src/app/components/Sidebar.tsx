@@ -18,6 +18,12 @@ export default function Sidebar() {
     { href: "https://www.instagram.com/suneclipsedmoon/", title: "Blog", icon: VscEdit },
   ];
 
+  // Normalize path for comparison (remove trailing slashes except for root)
+  const normalizePath = (path: string) => {
+    if (path === "/") return path;
+    return path.replace(/\/$/, "");
+  };
+
   return (
     <aside 
       className="w-12 p-4 flex flex-col items-center justify-between h-full"
@@ -25,8 +31,8 @@ export default function Sidebar() {
     >
       <div className="flex flex-col items-center space-y-6">
         {navItems.map((item) => {
-          const isActive = item.href === currentPath;
           const isExternal = item.href.startsWith('http');
+          const isActive = !isExternal && normalizePath(item.href) === normalizePath(currentPath);
           
           if (isExternal) {
             return (
