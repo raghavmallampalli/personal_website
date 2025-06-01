@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Official Dracula Color Palette */
+  --dracula-background: #282A36;
+  --dracula-current-line: #44475A;
+  --dracula-selection: #44475A;
+  --dracula-foreground: #F8F8F2;
+  --dracula-comment: #6272A4;
+  --dracula-cyan: #8BE9FD;
+  --dracula-green: #50FA7B;
+  --dracula-orange: #FFB86C;
+  --dracula-pink: #FF79C6;
+  --dracula-purple: #BD93F9;
+  --dracula-red: #FF5555;
+  --dracula-yellow: #F1FA8C;
+  
+  /* Additional shades for UI */
+  --dracula-darker: #21222C; /* Darker shade for tab bar and status bar */
+  --dracula-bright-white: #FFFFFF; /* Brighter white for active sidebar icon */
+   
+  /* Overriding existing theme variables */
+  --background: var(--dracula-background); 
+  --foreground: var(--dracula-foreground);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+/* Forcing consistent theme */
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--dracula-background);
+    --foreground: var(--dracula-foreground);
   }
 }
 
+/* Remove default Next.js theme block if present, or ensure it doesn't override Dracula */
+/* @theme inline { ... } */
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--dracula-darker); /* Outer area uses darker shade */
+  color: var(--dracula-foreground);
+  font-family: var(--font-geist-sans), 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+::selection {
+  background-color: var(--dracula-selection);
+  color: var(--dracula-foreground);
+}
+
+/* Base link styling */
+a {
+  color: var(--dracula-pink);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--dracula-purple);
+  text-decoration: underline;
 }

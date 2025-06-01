@@ -1,0 +1,38 @@
+export interface FavoriteItem {
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  link: string;
+}
+
+export const favorites: FavoriteItem[] = [
+  {
+    title: "Sinners (2025)",
+    description: "'I Lied to You' scene went hard",
+    icon: "🎬",
+    color: "var(--dracula-pink)",
+    link: "#"
+  },
+  {
+    title: "The Knife of Dreams (2005)", 
+    description: "Robert Jordan's last book in the Wheel of Time series",
+    icon: "📚",
+    color: "var(--dracula-purple)",
+    link: "#"
+  },
+  {
+    title: "TabPFNv2",
+    description: "Neurons finally reached tabular models", 
+    icon: "📄",
+    color: "var(--dracula-cyan)",
+    link: "#"
+  },
+  {
+    title: "Bone (1991)",
+    description: "Kept reading it right to left",
+    icon: "💥", 
+    color: "var(--dracula-orange)",
+    link: "#"
+  }
+]; 
