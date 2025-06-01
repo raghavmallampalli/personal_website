@@ -4,7 +4,7 @@ import "./globals.css";
 import Sidebar from "./components/Sidebar";
 import StatusBar from "./components/StatusBar";
 import TabBar from "./components/TabBar";
-import MacTitleBar from "./components/MacTitleBar";
+import TitleBar from "./components/TitleBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +38,7 @@ export default function RootLayout({
             borderColor: 'var(--dracula-comment)'
           }}
         >
-          <MacTitleBar />
+          <TitleBar />
           <div className="flex flex-col flex-1 h-full overflow-hidden">
             <div className="flex flex-1 overflow-hidden">
               <Sidebar />

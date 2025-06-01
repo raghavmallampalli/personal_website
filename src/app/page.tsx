@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image'; // Keep for now, might add a small logo/icon later if desired
 import Link from "next/link";
 
 interface AboutLink {
