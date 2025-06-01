@@ -1,0 +1,26 @@
+about:
+  profile:
+    name: "Raghav Mallampalli"
+    title: "Deep Learning Engineer"
+  
+  links:
+    - icon: "🔬"
+      text: "I'm into deep learning and machine learning. I tolerate statistics."
+      type: "internal"
+      url: "/skills"
+    
+    - icon: "📸"
+      text: "I like to take photos and write articles, critiques and short stories."
+      type: "external"
+      url: "https://www.instagram.com/suneclipsedmoon/"
+    
+    - icon: "💼"
+      text: "If you are interested in hiring me, you may want to check out my technical experience. I can be contacted via my LinkedIn or personal mail."
+      type: "internal"
+      url: "/experience"
+  
+  current_hustle:
+    title: "What keeps my lights on"
+    message: "I'm currently building time series models @"
+    link_url: "https://www.synthefy.com/"
+    link_text: "Synthefy, Austin"

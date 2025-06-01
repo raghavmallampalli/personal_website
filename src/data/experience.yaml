@@ -1,0 +1,55 @@
+experience:
+  - occupation: "Design Engineer, Mechanical Lead at Team Anveshak"
+    start-date: "April 2019"
+    place: "CFI IIT Madras"
+    events:
+      - name: "Designed rover components and systems"
+      - name: "Performed kinematic and IK spatial computations"
+      - name: "Led mechanical design team development"
+      - name: "Represented IIT Madras in international competitions"
+
+  - occupation: "Data Analyst Intern at BluePad"
+    start-date: "May 2021"
+    place: "Chennai"
+    events:
+      - name: "Developed keyword extraction for Indic languages"
+      - name: "Implemented topic modelling and classification"
+      - name: "Fine-tuned multilingual models (mBART, mt5)"
+      - name: "Built vernacular translation capabilities"
+
+  - occupation: "Data & Analytics Intern at Cargill Business Services"
+    start-date: "September 2021"
+    place: "Remote"
+    events:
+      - name: "Built NLP module for unsupervised text classification"
+      - name: "Implemented topic modelling on temporal textual data"
+      - name: "Applied network graphs for audit data analysis"
+      - name: "Delivered comprehensive analytics solution"
+
+  - occupation: "Machine Learning Intern at Microsoft India"
+    start-date: "May 2022"
+    place: "Remote"
+    events:
+      - name: "Implemented Electra for LM rescoring"
+      - name: "Improved existing ASR module performance"
+      - name: "Deployed GPU training scripts on Azure ML platform"
+      - name: "Optimized model training workflows"
+
+  - occupation: "Master's Thesis: Depth Prediction and Light Field Reconstruction"
+    start-date: "July 2022"
+    place: "IIT Madras"
+    events:
+      - name: "Developed video models for depth extraction"
+      - name: "Implemented convolutional vision transformer models"
+      - name: "Created dataset of synced videos using custom app"
+      - name: "Published to ICCP 2024 with distinction"
+
+  - occupation: "Data Scientist @ Bing Translation at Microsoft India"
+    start-date: "August 2023"
+    place: "Hyderabad"
+    events:
+      - name: "Developed triggering and translation models for Bing queries"
+      - name: "Explored image translation models"
+      - name: "Fullstack UX development for translation experience"
+      - name: "Built triggering models for translation intent that brought Bing to parity with competition"
+      - name: "Prompt engineered for improved translation quality"

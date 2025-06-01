@@ -1,0 +1,42 @@
+statusbar:
+  wsl_indicator:
+    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    icon: "VscRemote"
+    background_color: "var(--dracula-purple)"
+  
+  left_section:
+    title: "Socials"
+    links:
+      - platform: "twitter"
+        url: "https://x.com/r_mallampalli"
+        icon: "FaTwitter"
+      - platform: "instagram"  
+        url: "https://www.instagram.com/raghavmallampalli/"
+        icon: "FaInstagram"
+  
+  right_section:
+    status_indicators:
+      sync_icon: "VscSync"
+      errors: 0
+      warnings: 0
+    
+    contact_links:
+      - type: "email"
+        url: "mailto:raghavmallampalli1234@gmail.com"
+        display_text: "raghavmallampalli1234@gmail.com"
+        icon: "FaEnvelope"
+        show_text_on_mobile: false
+      
+      - type: "github"
+        url: "https://github.com/raghavmallampalli/"
+        title: "GitHub"
+        icon: "FaGithub"
+        size: 16
+      
+      - type: "linkedin"
+        url: "https://www.linkedin.com/in/raghav-mallampalli/"
+        title: "LinkedIn"
+        icon: "FaLinkedin"
+        size: 16
+    
+    notification_icon: "VscBell" 

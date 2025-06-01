@@ -1,0 +1,86 @@
+skills:
+  sections:
+    - cell_number: "In [1]:"
+      cell_type: "markdown"
+      title: "🐍 Deep Learning"
+      skills:
+        - name: "torch"
+          color: "var(--dracula-green)"
+          description: "convolutional and transformer models"
+        - name: "lightning"
+          color: "var(--dracula-cyan)"
+          description: "distributed training and inference"
+        - name: "wandb"
+          color: "var(--dracula-yellow)"
+          description: "experiment tracking and visualization"
+        - name: "keras and jax"
+          color: "var(--dracula-purple)"
+          description: "simple neural network models"
+        - name: "seaborn"
+          color: "var(--dracula-orange)"
+          description: "data visualization"
+        - name: "plotly"
+          color: "var(--dracula-pink)"
+          description: "interactive visualizations and dashboards"
+
+    - cell_number: "In [2]:"
+      cell_type: "markdown"
+      title: "🌐 Application Development"
+      skills:
+        - name: "React + Next.js + Tailwind"
+          color: "var(--dracula-cyan)"
+          description: "Frontend framework"
+        - name: "React Native"
+          color: "var(--dracula-pink)"
+          description: "Backend JavaScript runtime"
+        - name: "C# MVVM"
+          color: "var(--dracula-pink)"
+          description: "sub 100ms web applications"
+
+    - cell_number: "In [3]:"
+      cell_type: "markdown"
+      title: "⚡ General & Tools"
+      skills:
+        - name: "git"
+          color: "var(--dracula-orange)"
+          description: "version control"
+        - name: "docker"
+          color: "var(--dracula-cyan)"
+          description: "containerization"
+        - name: "azure + aws"
+          color: "var(--dracula-purple)"
+          description: "cloud computing, training and inference"
+        - name: "3d printing"
+          color: "var(--dracula-yellow)"
+          description: "3d printing and modeling"
+        - name: "photoshop + davinci resolve"
+          color: "var(--dracula-orange)"
+          description: "photo and video editing"
+        - name: "business analytics"
+          color: "var(--dracula-green)"
+          description: "data analysis in risk management domain"
+
+  code_cell:
+    cell_number: "In [4]:"
+    cell_type: "code"
+    code: |
+      # Quick skill summary
+      skills = {
+          'deep_learning': ['torch', 'lightning', 'wandb', 'keras and jax', 'seaborn', 'plotly'],
+          'app_dev': ['React + Next.js + Tailwind', 'React Native', 'C# MVVM'],
+          'general': ['git', 'docker', 'azure + aws', '3d printing', 'photoshop + davinci resolve', 'business analytics']
+      }
+
+      print(f"Total skills: {sum(len(v) for v in skills.values())}")
+      print(f"Deep Learning: {len(skills['deep_learning'])} skills")
+      print(f"App Development: {len(skills['app_dev'])} skills") 
+      print(f"General: {len(skills['general'])} skills")
+    output:
+      - text: "Total skills: 15"
+        color: "var(--dracula-green)"
+      - text: "Deep Learning: 6 skills"
+        color: "var(--dracula-cyan)"
+      - text: "App Development: 3 skills"
+        color: "var(--dracula-yellow)"
+      - text: "General: 6 skills"
+        color: "var(--dracula-purple)" 
