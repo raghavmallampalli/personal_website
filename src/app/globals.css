@@ -73,8 +73,8 @@ a:hover {
 
 /* Custom VS Code-style scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 0.625rem;
+  height: 0.625rem;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -83,7 +83,7 @@ a:hover {
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -128,6 +128,10 @@ a:hover {
   right: var(--page-padding);
   bottom: var(--page-padding);
   overflow: auto;
+  min-width: 100%;
+  /* Allow horizontal scrolling for long text */
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 /* Global Page Layout Classes */
@@ -289,4 +293,35 @@ a:hover {
   .section-title {
     font-size: 1.25rem;
   }
+}
+
+/* Git-graph styling - target occupation vs event commits */
+
+/* General git-graph text improvements */
+.experience-scrollable svg {
+  min-width: 100%;
+  width: auto;
+  overflow: visible;
+}
+
+.experience-scrollable svg text {
+  font-size: 1rem !important;
+  text-anchor: start !important;
+  white-space: nowrap;
+}
+
+/* Occupation commits - make text uppercase and cyan */
+.experience-scrollable svg text.occupation-commit {
+  text-transform: uppercase !important;
+  fill: var(--dracula-cyan) !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+}
+
+/* Event commits - keep original styling */
+.experience-scrollable svg text.event-commit {
+  text-transform: none !important;
+  fill: var(--dracula-foreground) !important;
+  font-weight: normal !important;
+  font-size: 1rem !important;
 }

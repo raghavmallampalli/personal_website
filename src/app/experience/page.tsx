@@ -1,84 +1,44 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createGitgraph, templateExtend, TemplateName, Mode, Orientation } from '@gitgraph/js';
 import CustomScrollbar from '@/components/CustomScrollbar';
+import yaml from 'js-yaml';
 
-const experienceData = [
-  {
-    occupation: "Junior Developer at StartUp Ventures Inc",
-    period: "2019-01 - 2020-05",
-    place: "Austin, TX",
-    events: [
-      {
-        name: "Completed React onboarding bootcamp",
-        date: "15 Jan 2019",
-      },
-      {
-        name: "Built first full-stack web application",
-        date: "12 Mar 2019",
-      },
-      {
-        name: "Implemented user authentication system",
-        date: "28 Jun 2019",
-      },
-      {
-        name: "Deployed application to production AWS",
-        date: "14 Nov 2019",
-      }
-    ]
-  },
-  {
-    occupation: "Full Stack Developer at Digital Solutions Ltd",
-    period: "2020-06 - 2022-02",
-    place: "New York, NY",
-    events: [
-      {
-        name: "Led migration from jQuery to React",
-        date: "18 Aug 2020",
-      },
-      {
-        name: "Architected microservices backend",
-        date: "03 Dec 2020",
-      },
-      {
-        name: "Mentored 2 junior developers",
-        date: "25 Apr 2021",
-      },
-      {
-        name: "Optimized database performance by 40%",
-        date: "09 Sep 2021",
-      }
-    ]
-  },
-  {
-    occupation: "Senior Software Engineer at Tech Innovation Corp",
-    period: "2022-03 - Present",
-    place: "San Francisco, CA",
-    events: [
-      {
-        name: "Designed scalable ML pipeline architecture",
-        date: "22 May 2022",
-      },
-      {
-        name: "Led cross-functional team of 8 engineers",
-        date: "15 Oct 2022",
-      },
-      {
-        name: "Launched AI-powered recommendation engine",
-        date: "30 Jan 2023",
-      },
-      {
-        name: "Presented at TechCrunch Disrupt conference",
-        date: "12 Sep 2024",
-      }
-    ]
-  }
-];
+interface ExperienceEvent {
+  name: string;
+}
+
+interface ExperienceItem {
+  occupation: string;
+  'start-date': string;
+  place: string;
+  events: ExperienceEvent[];
+}
+
+interface ExperienceData {
+  experience: ExperienceItem[];
+}
 
 export default function ExperiencePage() {
   const gitgraphContainer = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [experienceData, setExperienceData] = useState<ExperienceItem[]>([]);
+
+  // Load experience data from YAML file
+  useEffect(() => {
+    const loadExperienceData = async () => {
+      try {
+        const response = await fetch('/api/experience');
+        const data = await response.json();
+        setExperienceData(data.experience);
+      } catch (error) {
+        console.error('Failed to load experience data:', error);
+      }
+    };
+
+    loadExperienceData();
+  }, []);
 
   useEffect(() => {
     // Set container height to match main element
@@ -100,7 +60,7 @@ export default function ExperiencePage() {
   }, []);
 
   useEffect(() => {
-    if (!gitgraphContainer.current) return;
+    if (!gitgraphContainer.current || experienceData.length === 0) return;
 
     // Clear previous content
     gitgraphContainer.current.innerHTML = '';
@@ -125,13 +85,16 @@ export default function ExperiencePage() {
         colors: [purpleColor, yellowColor], // Dracula colors from CSS variables
         branch: {
           lineWidth: branchLineWidth, // From CSS variable
-          spacing: branchSpacing, // From CSS variable
+          spacing: branchSpacing * 1.2, // Increase spacing for longer text
         },
         commit: {
-          spacing: commitSpacing, // From CSS variable
+          spacing: commitSpacing * 1.3, // Increase commit spacing
           dot: {
             size: dotSize, // From CSS variable
             strokeWidth: dotStrokeWidth, // From CSS variable
+          },
+          message: {
+            font: 'inherit',
           },
         },
       }),
@@ -151,7 +114,7 @@ export default function ExperiencePage() {
     
     // Add final commit to show current state (appears at top)
     master.commit({
-      subject: "Now",
+      subject: "HEAD",
       style: {
         color: purpleColor, // Dracula purple
         dot: {
@@ -182,7 +145,7 @@ export default function ExperiencePage() {
       // Add sequential commits for each event (in reverse order)
       [...job.events].reverse().forEach((event, eventIndex) => {
         eventBranch.commit({
-          subject: `${event.name} | ${event.date}`,
+          subject: `${event.name}`,
           style: {
             color: yellowColor, // Dracula yellow
             dot: {
@@ -202,7 +165,7 @@ export default function ExperiencePage() {
       master.merge({
         branch: eventBranch,
         commitOptions: {
-          subject: `${job.occupation} | ${job.period} | ${job.place}`,
+          subject: `${job.occupation} | ${job['start-date']} | ${job.place}`,
           style: {
             color: purpleColor, // Dracula purple for merge node
             dot: {
@@ -221,7 +184,7 @@ export default function ExperiencePage() {
 
     // Add initial commit to start the career timeline (appears at bottom)
     master.commit({
-      subject: "Start",
+      subject: "INITIAL COMMIT",
       style: {
         color: purpleColor, // Dracula purple
         dot: {
@@ -236,13 +199,39 @@ export default function ExperiencePage() {
       },
     });
 
-  }, []);
+    // Post-process the SVG to add classes for styling
+    setTimeout(() => {
+      const svgContainer = gitgraphContainer.current;
+      if (svgContainer) {
+        const textElements = svgContainer.querySelectorAll('svg text');
+        
+        textElements.forEach((textElement) => {
+          const textContent = textElement.textContent || '';
+          
+          // Check if this is an occupation commit (contains company/role names)
+          const isOccupation = experienceData.some(job => 
+            textContent.includes("|")
+          );
+          
+          if (isOccupation) {
+            textElement.classList.add('occupation-commit');
+          } else {
+            textElement.classList.add('event-commit');
+          }
+        });
+      }
+    }, 100); // Small delay to ensure SVG is fully rendered
+
+  }, [experienceData]);
 
   return (
     <div ref={containerRef} className="experience-container">
       <h1 className="text-2xl md:text-3xl font-light page-title">
         Professional Experience
       </h1>
+      <p className="text-sm mb-6" style={{ color: 'var(--dracula-comment)' }}>
+        What got me up in the morning
+      </p>
       
       <CustomScrollbar className="experience-scrollable">
         <div ref={gitgraphContainer} />

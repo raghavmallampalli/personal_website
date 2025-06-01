@@ -1,20 +1,93 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image'; // Keep for now, might add a small logo/icon later if desired
 import Link from "next/link";
-import { favorites } from "./config";
+
+interface AboutLink {
+  icon: string;
+  text: string;
+  type: 'internal' | 'external';
+  url: string;
+}
+
+interface AboutData {
+  about: {
+    profile: {
+      name: string;
+      title: string;
+    };
+    links: AboutLink[];
+    current_hustle: {
+      title: string;
+      message: string;
+      link_text: string;
+      link_url: string;
+    };
+  };
+}
+
+interface Obsession {
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  link: string;
+}
+
+interface ObsessionsData {
+  obsessions: Obsession[];
+}
 
 export default function Home() {
+  const [aboutData, setAboutData] = useState<AboutData | null>(null);
+  const [obsessionsData, setObsessionsData] = useState<ObsessionsData | null>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [aboutResponse, obsessionsResponse] = await Promise.all([
+          fetch('/api/about'),
+          fetch('/api/obsessions')
+        ]);
+        
+        const aboutResult = await aboutResponse.json();
+        const obsessionsResult = await obsessionsResponse.json();
+        
+        setAboutData(aboutResult);
+        setObsessionsData(obsessionsResult);
+      } catch (error) {
+        console.error('Failed to load data:', error);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  if (!aboutData || !obsessionsData) {
+    return (
+      <div className="page-container">
+        <div className="mb-6">
+          <h1 className="text-2xl md:text-3xl font-light page-title">
+            Loading...
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="page-container">
       {/* Header Section */}
       <div className="mb-6">
         <h1 className="text-2xl md:text-3xl font-light page-title">
-          Raghav Mallampalli
+          {aboutData.about.profile.name}
         </h1>
         <p 
           className="text-sm"
           style={{ color: 'var(--dracula-comment)' }}
         >
-          Deep Learning Engineer
+          {aboutData.about.profile.title}
         </p>
       </div>
 
@@ -31,44 +104,32 @@ export default function Home() {
               About Me
             </h2>
             <div className="space-y-2">
-              <Link 
-                href="/skills"
-                className="flex items-center space-x-3 p-2 rounded text-sm transition-all duration-200 hover:opacity-80"
-                style={{ 
-                  backgroundColor: 'var(--dracula-current-line)', 
-                  color: 'var(--dracula-foreground)',
-                  textDecoration: 'none'
-                }}
-              >
-                <span className="w-4">🔬</span>
-                <span>I'm into deep learning and machine learning. I tolerate statistics.</span>
-              </Link>
-              <a 
-                href="https://www.instagram.com/suneclipsedmoon/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-2 rounded text-sm transition-all duration-200 hover:opacity-80"
-                style={{ 
-                  backgroundColor: 'var(--dracula-current-line)', 
-                  color: 'var(--dracula-foreground)',
-                  textDecoration: 'none'
-                }}
-              >
-                <span className="w-4">📸</span>
-                <span>I like to take photos and write articles, critiques and short stories.</span>
-              </a>
-              <Link 
-                href="/experience"
-                className="flex items-center space-x-3 p-2 rounded text-sm transition-all duration-200 hover:opacity-80"
-                style={{ 
-                  backgroundColor: 'var(--dracula-current-line)', 
-                  color: 'var(--dracula-foreground)',
-                  textDecoration: 'none'
-                }}
-              >
-                <span className="w-4">💼</span>
-                <span>If you are interested in hiring me, you may want to check out my technical experience. I can be contacted via my LinkedIn or personal mail.</span>
-              </Link>
+              {aboutData.about.links.map((link, index) => {
+                const LinkComponent = link.type === 'internal' ? Link : 'a';
+                const linkProps = link.type === 'internal' 
+                  ? { href: link.url }
+                  : { 
+                      href: link.url, 
+                      target: "_blank", 
+                      rel: "noopener noreferrer" 
+                    };
+
+                return (
+                  <LinkComponent
+                    key={index}
+                    {...linkProps}
+                    className="flex items-center space-x-3 p-2 rounded text-sm transition-all duration-200 hover:opacity-80"
+                    style={{ 
+                      backgroundColor: 'var(--dracula-current-line)', 
+                      color: 'var(--dracula-foreground)',
+                      textDecoration: 'none'
+                    }}
+                  >
+                    <span className="w-4">{link.icon}</span>
+                    <span>{link.text}</span>
+                  </LinkComponent>
+                );
+              })}
             </div>
           </section>
 
@@ -78,13 +139,20 @@ export default function Home() {
               className="text-lg font-medium mb-3"
               style={{ color: 'var(--dracula-foreground)' }}
             >
-              What keeps my lights on
+              {aboutData.about.current_hustle.title}
             </h2>
             <p 
               className="text-xs"
               style={{ color: 'var(--dracula-comment)' }}
             >
-              You have no recent folders, <a href="#" className="underline" style={{ color: 'var(--dracula-cyan)' }}>open a folder</a> to start.
+              {aboutData.about.current_hustle.message}{' '}
+              <a 
+                href={aboutData.about.current_hustle.link_url} 
+                className="underline" 
+                style={{ color: 'var(--dracula-cyan)' }}
+              >
+                {aboutData.about.current_hustle.link_text}
+              </a>
             </p>
           </section>
         </div>
@@ -99,7 +167,7 @@ export default function Home() {
               Current Obsessions
             </h2>
             <div className="space-y-3">
-              {favorites.map((item, index) => (
+              {obsessionsData.obsessions.map((item, index) => (
                 <a 
                   key={index}
                   href={item.link}
